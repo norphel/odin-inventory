@@ -2,7 +2,7 @@ import { Router } from "express";
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.send("Index route");
+  res.render("index");
 });
 
 export default router;
