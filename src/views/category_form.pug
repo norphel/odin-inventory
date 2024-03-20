@@ -9,6 +9,11 @@ block content
       input(id="name", class="form-control", type="text", placeholder="Electronics, Clothing, etc.", name="name", required, value=(category===undefined ? '' : category.name))
     div(class="form-group")
       label(for="description") Description: 
-      textarea(id="description", class="form-control", type="text", name="description", required, value=(category===undefined ? '' : category.description), cols="30", rows="10")
+      textarea(id="description", class="form-control", name="description", required, value=(category===undefined ? '' : category.description), cols="30", rows="10")
     button(type="submit") Submit 
+
+  if errors 
+    ul 
+      for error in errors 
+        li!= error.msg
       

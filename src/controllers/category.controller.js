@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+import { body, validationResult } from "express-validator";
 
 import { Category } from "../models/category.model.js";
 import { Item } from "../models/item.model.js";
@@ -39,4 +40,47 @@ const category_create_get = (req, res, next) => {
   });
 };
 
-export { category_list, category_create_get, category_detail };
+const category_create_post = [
+  body("name", "Category name is required")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("description", "Category description is required")
+    .isLength({ min: 1 })
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const category = new Category({
+      name: req.body.name,
+      description: req.body.description,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("category_form", {
+        title: "Create Category",
+        category: category,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const categoryExists = await Category.findOne({ name: req.body.name })
+        .collation({ locale: "en", strength: 2 })
+        .exec();
+      if (categoryExists) {
+        res.redirect(categoryExists.url);
+      } else {
+        await category.save();
+        res.redirect(category.url);
+      }
+    }
+  }),
+];
+
+export {
+  category_list,
+  category_create_get,
+  category_detail,
+  category_create_post,
+};
