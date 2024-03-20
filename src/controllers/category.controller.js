@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 
 import { Category } from "../models/category.model.js";
+import { Item } from "../models/item.model.js";
 
 const category_list = asyncHandler(async (req, res, next) => {
   const allCategories = await Category.find({}, "name description")
@@ -13,4 +14,23 @@ const category_list = asyncHandler(async (req, res, next) => {
   });
 });
 
-export { category_list };
+const category_detail = asyncHandler(async (req, res, next) => {
+  const [category, allItems] = await Promise.all([
+    Category.findById(req.params.id).exec(),
+    Item.find({ category: req.params.id }).exec(),
+  ]);
+
+  if (category === null) {
+    const err = new Error("Category not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("category_detail", {
+    title: category.name,
+    category: category,
+    allItems: allItems,
+  });
+});
+
+export { category_list, category_detail };

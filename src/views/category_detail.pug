@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+
+  h2= title 
+  p= category.description 
+  if allItems.length
+    ul 
+      each item in allItems 
+        a(href=item.url) #{item.name} 
+  else 
+    p There are no items in this category 

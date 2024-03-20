@@ -14,4 +14,19 @@ const item_list = asyncHandler(async (req, res, next) => {
   });
 });
 
-export { item_list };
+const item_detail = asyncHandler(async (req, res, next) => {
+  const item = await Item.findById(req.params.id).populate("category").exec();
+
+  if (item === null) {
+    const err = new Error("Item not found");
+    err.status = 404;
+    next(err);
+  }
+
+  res.render("item_detail", {
+    title: item.name,
+    item: item,
+  });
+});
+
+export { item_list, item_detail };

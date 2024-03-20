@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+
+  h2= title 
+  p(class="description")= item.description 
+  p(class="category")= item.category 
+  p(class="price")= item.price 
+  p(class="stockQty")= item.numberInStock 
