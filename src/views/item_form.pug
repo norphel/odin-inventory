@@ -4,12 +4,6 @@ block content
   h2= title 
   form(method="POST")
     div(class="form-group")
-      label(for="name") Item name: 
-      input(type="text", id="name", class="form-control", name="name" required, value=(item===undefined ? "" : item.name)) 
-    div(class="form-group")
-      label(for="description") Item description: 
-      textarea(id="description", class="form-control", rows="10", cols="30", name="description", required, value=(item===undefined ? "" : item.description)) 
-    div(class="form-group")
       label(for="category") Category: 
       select(id="category", class="form-control", name="category", required)
         option(value="") --Please select a category--
@@ -19,9 +13,20 @@ block content
           else 
             option(value=category._id) #{category.name} 
     div(class="form-group")
+      label(for="name") Item name: 
+      input(type="text", id="name", class="form-control", name="name" required, value=(item===undefined ? "" : item.name)) 
+    div(class="form-group")
+      label(for="description") Item description: 
+      textarea(id="description", class="form-control", rows="10", cols="30", name="description", required, value=(item===undefined ? "" : item.description)) 
+    div(class="form-group")
       label(for="price") Item price: 
-      input(type="number", id="price", class="form-control", name="price", required, value=(item===undefined ? "" : item.price)) 
+      input(type="number", id="price", class="form-control", min="0.01", step="0.01", name="price", required, value=(item===undefined ? "" : item.price)) 
     div(class="form-group")
       label(for="numberInStock") Quantity in Stock: 
-      input(type="number", id="numberInStock", class="form-control", name="numberInStock", required, min="1", value=(item===undefined ? "" : item.numberInStock))
+      input(type="number", id="numberInStock", class="form-control", name="numberInStock", required, min="0", step="1", value=(item===undefined ? "" : item.numberInStock))
     button(type="submit") Submit
+
+  if errors 
+    ul 
+      for error in errors 
+        li!= error.msg
