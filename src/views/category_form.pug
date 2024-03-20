@@ -1,0 +1,14 @@
+extends layout 
+
+block content 
+
+  h2= title 
+  form(method="POST")
+    div(class="form-group")
+      label(for="name") Category: 
+      input(id="name", class="form-control", type="text", placeholder="Electronics, Clothing, etc.", name="name", required, value=(category===undefined ? '' : category.name))
+    div(class="form-group")
+      label(for="description") Description: 
+      textarea(id="description", class="form-control", type="text", name="description", required, value=(category===undefined ? '' : category.description), cols="30", rows="10")
+    button(type="submit") Submit 
+      

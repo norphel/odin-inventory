@@ -34,3 +34,28 @@ li {
 a {
   text-decoration: none;
 }
+form {
+  padding-block: 1.5rem;
+}
+.form-group {
+  display: block;
+}
+.form-control {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  padding: 5px;
+}
+.form-group label {
+  font-size: 18px;
+  font-weight: 600;
+}
+button {
+  padding: 8px 24px;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 18px;
+  background-color: rgb(34, 144, 255);
+  border: none;
+}

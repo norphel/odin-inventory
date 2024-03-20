@@ -13,7 +13,7 @@ const category_list = asyncHandler(async (req, res, next) => {
     categories: allCategories,
   });
 });
-
+/*
 const category_detail = asyncHandler(async (req, res, next) => {
   const [category, allItems] = await Promise.all([
     Category.findById(req.params.id).exec(),
@@ -31,6 +31,16 @@ const category_detail = asyncHandler(async (req, res, next) => {
     category: category,
     allItems: allItems,
   });
-});
+});*/
 
-export { category_list, category_detail };
+const category_create_get = (req, res, next) => {
+  res.render("category_form", {
+    title: "Create Category",
+  });
+};
+
+export {
+  category_list,
+  // category_detail,
+  category_create_get,
+};
