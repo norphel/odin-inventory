@@ -3,10 +3,16 @@ extends layout
 block content 
 
   h2= title 
-  p= category.description 
+  p(style="margin-bottom: 20px;")= category.description 
   if allItems.length
     ul 
       each item in allItems 
         a(href='/items/' + item.url) #{item.name} 
   else 
     p There are no items in this category 
+
+  hr(style="margin-block: 20px;")
+  p 
+    a(href='/categories' + category.url + '/delete') Delete category
+  p(style="margin-top: 10px;") 
+    a(href='/categories' + category.url + '/update') Update category

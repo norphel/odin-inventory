@@ -77,7 +77,7 @@ const item_create_post = [
       return;
     } else {
       await item.save();
-      res.redirect(item.url);
+      res.redirect("/items" + item.url);
     }
   }),
 ];
