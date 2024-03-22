@@ -17,7 +17,7 @@ block content
       input(type="text", id="name", class="form-control", name="name" required, value=(item===undefined ? "" : item.name)) 
     div(class="form-group")
       label(for="description") Item description: 
-      textarea(id="description", class="form-control", rows="10", cols="30", name="description", required, value=(item===undefined ? "" : item.description)) 
+      textarea(id="description", class="form-control", rows="10", cols="30", name="description", required) #{item===undefined ? "" : item.description}
     div(class="form-group")
       label(for="price") Item price: 
       input(type="number", id="price", class="form-control", min="0.01", step="0.01", name="price", required, value=(item===undefined ? "" : item.price)) 

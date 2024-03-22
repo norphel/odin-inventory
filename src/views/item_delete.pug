@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+
+  h2= title
+
+  p Do you really want to delete this item?
+
+  form(method="POST")
+    div(class="form-group") 
+      input(id="itemid", class="form-control", type='hidden', name='itemid', value=item._id)
+    button(type='submit') Delete
